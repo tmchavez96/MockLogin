@@ -1,0 +1,1 @@
+So the interview could have been better. I needed to create a simple app that jsut changed some changed some text when a button was pushed. Easy to do, but then I was asked to it programmaticly. Then things got messy. Also, I guess I need to read the skype chat more.

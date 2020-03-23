@@ -11,6 +11,7 @@ import UIKit
 class ViewController: UIViewController {
 
     var logo = UIImage(named: "paypalLogo")
+    var logoView = UIImageView()
     var username = UITextField()
     var usernameBorder = UIView()
     var password = UITextField(frame: CGRect(x:0,y:0,width:100,height:100))
@@ -24,11 +25,38 @@ class ViewController: UIViewController {
         setUpUI()
         moreSetup()
     }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        print(size)
+        reAllignUI(size: size)
+        print("shabba rights")
+        
+    }
 
+    func reAllignUI(size: CGSize){
+        UIView.animate(withDuration: 0.25) {
+            print("animating")
+            let parentWidth:Int = Int(size.width)
+            let parentHeight:Int = Int(size.height)
+            let heightStart:Int = Int(size.height/3)
+            let xIndent:Int = (parentWidth > parentHeight ?  80 :  40)
+            print(xIndent)
+            self.logoView.frame = CGRect(x:((parentWidth/2)-xIndent), y: (parentWidth > parentHeight ? 10:80), width: 80, height: 80)
+            let inputWidths = parentWidth-xIndent
+            self.username.frame = CGRect(x:xIndent/2,y:heightStart,width: inputWidths,height:40)
+            self.usernameBorder.frame = CGRect(x:xIndent/2,y:heightStart+40,width: inputWidths,height:3)
+            self.password.frame = CGRect(x:xIndent/2,y:heightStart+50,width: inputWidths,height:40)
+            self.passwordBorder.frame = CGRect(x:xIndent/2,y:heightStart+90,width: inputWidths,height:3)
+            
+            self.forgotPass.frame = CGRect(x:parentWidth - 90,y:heightStart+50,width: 70,height: 40)
+            self.toggleUsernameMethod.frame = CGRect(x:0,y:heightStart+100,width:parentWidth,height: 40)
+        }
+    }
     
     func setUpUI(){
         let parentConstarints = self.view.frame
-        let logoView = UIImageView(image:logo)
+        logoView = UIImageView(image: logo)
 //        logoView.translatesAutoresizingMaskIntoConstraints = false
 //        username.translatesAutoresizingMaskIntoConstraints = false
 //        password.translatesAutoresizingMaskIntoConstraints = false
